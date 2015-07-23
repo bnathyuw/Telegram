@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telegram.Journeys", "Telegram.Journeys\Telegram.Journeys.csproj", "{6C1F15D6-BD26-4D9E-ABB6-1BA3D4935CAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telegram.Sender", "Telegram.Sender\Telegram.Sender.csproj", "{209F49BA-9F10-4D10-911A-A3A869B583FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telegram.Recipient", "Telegram.Recipient\Telegram.Recipient.csproj", "{62702321-C90E-4321-A99C-A33578DEAFDC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4A861AAD-D19B-4CCC-85F8-9A694ADC5568}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C1F15D6-BD26-4D9E-ABB6-1BA3D4935CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C1F15D6-BD26-4D9E-ABB6-1BA3D4935CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C1F15D6-BD26-4D9E-ABB6-1BA3D4935CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C1F15D6-BD26-4D9E-ABB6-1BA3D4935CAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{209F49BA-9F10-4D10-911A-A3A869B583FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{209F49BA-9F10-4D10-911A-A3A869B583FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{209F49BA-9F10-4D10-911A-A3A869B583FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{209F49BA-9F10-4D10-911A-A3A869B583FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62702321-C90E-4321-A99C-A33578DEAFDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62702321-C90E-4321-A99C-A33578DEAFDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62702321-C90E-4321-A99C-A33578DEAFDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62702321-C90E-4321-A99C-A33578DEAFDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
