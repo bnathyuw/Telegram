@@ -2,7 +2,7 @@
 
 namespace Telegram.Sender
 {
-    public static class Program
+    public static class SenderProgram
     {
         public static void Main(string[] args)
         {

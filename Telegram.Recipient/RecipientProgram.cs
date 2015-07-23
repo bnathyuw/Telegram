@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Threading;
 
 namespace Telegram.Recipient
 {
-    public static class Program
+    public static class RecipientProgram
     {
         public static void Main(string[] args)
         {
