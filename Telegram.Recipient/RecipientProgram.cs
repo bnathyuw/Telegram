@@ -10,3 +10,6 @@ namespace Telegram.Recipient
         }
     }
 }
+namespace Telegram.Recipient
+{
+}

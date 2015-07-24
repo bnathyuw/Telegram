@@ -7,76 +7,42 @@ namespace Telegram.Recipient.UnitTests
         [TestFixture]
         public class When_a_message_is_received : IReceiveMessages, IWriteOutput
         {
-            private Message _output;
+            private Message? _actualMessage;
+            private Message _expectedMessage;
 
-            [Test]
-            public void Outputs_the_message()
+            [SetUp]
+            public void SetUp()
             {
+                _actualMessage = null;
+                
                 var recipientController = new RecipientController(this, this);
 
                 recipientController.Run();
 
-                var message = new Message("Hello, world!");
-                OnMessageReceived(message);
-
-                Assert.That(_output, Is.EqualTo(message));
+                _expectedMessage = new Message("Hello, world!");
+                OnMessageReceived(new MessageEventArgs(_expectedMessage));
             }
 
-            public event MessageReceivedEvent MessageReceived;
-
-            protected virtual void OnMessageReceived(Message message)
+            [Test]
+            public void Outputs_the_message()
             {
-                MessageReceived(this, message);
+                Assert.That(_actualMessage, Is.EqualTo(_expectedMessage));
             }
+
+            public event MessageReceivedEventHandler MessageReceived;
+
+            protected virtual void OnMessageReceived(MessageEventArgs e)
+            {
+                var handler = MessageReceived;
+                if (handler == null) Assert.Fail("No listener attached");
+                handler(this, e);
+            }
+
 
             public void WriteMessage(Message message)
             {
-                _output = message;
+                _actualMessage = message;
             }
-        }
-    }
-
-    public interface IWriteOutput
-    {
-        void WriteMessage(Message message);
-    }
-
-    public interface IReceiveMessages
-    {
-        event MessageReceivedEvent MessageReceived;
-    }
-
-    public delegate void MessageReceivedEvent(object sender, Message message);
-
-    public struct Message
-    {
-        private readonly string _value;
-
-        public Message(string value)
-        {
-            _value = value;
-        }
-    }
-
-    public class RecipientController
-    {
-        private readonly IReceiveMessages _messageReceiver;
-        private readonly IWriteOutput _writeOutput;
-
-        public RecipientController(IReceiveMessages messageReceiver, IWriteOutput writeOutput)
-        {
-            _messageReceiver = messageReceiver;
-            _writeOutput = writeOutput;
-        }
-
-        private void WriteMessageToOutput(Message message)
-        {
-            _writeOutput.WriteMessage(message);
-        }
-
-        public void Run()
-        {
-            _messageReceiver.MessageReceived += (sender, message) => WriteMessageToOutput(message);
         }
     }
 }
