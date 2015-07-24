@@ -8,8 +8,8 @@ namespace Telegram.Recipient.IsolatedTests.TestRecipientController
         private Message? _actualMessage;
         private Message _expectedMessage;
 
-        [SetUp]
-        public void SetUp()
+        [TestFixtureSetUp]
+        public void TestFixtureSetUp()
         {
             _actualMessage = null;
 

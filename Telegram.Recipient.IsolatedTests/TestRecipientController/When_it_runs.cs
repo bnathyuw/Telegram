@@ -7,8 +7,8 @@ namespace Telegram.Recipient.IsolatedTests.TestRecipientController
     {
         private bool _started;
 
-        [SetUp]
-        public void SetUp()
+        [TestFixtureSetUp]
+        public void TestFixtureSetUp()
         {
             _started = false;
 

@@ -12,8 +12,8 @@ namespace Telegram.Recipient.IsolatedTests.TestOutputWriter
         private string _actualValue;
         private const string ExpectedValue = "expectedValue";
 
-        [SetUp]
-        public void SetUp()
+        [TestFixtureSetUp]
+        public void TestFixtureSetUp()
         {
             _standardOut = Console.Out;
             Console.SetOut(this);
