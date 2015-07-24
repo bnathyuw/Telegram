@@ -7,8 +7,8 @@
     <ProjectGuid>{60D0E727-DC09-4C8F-AA96-0478D5204DED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Telegram.Recipient.UnitTests</RootNamespace>
-    <AssemblyName>Telegram.Recipient.UnitTests</AssemblyName>
+    <RootNamespace>Telegram.Recipient.IsolatedTests</RootNamespace>
+    <AssemblyName>Telegram.Recipient.IsolatedTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
