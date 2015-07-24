@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{4A861A
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telegram.Recipient.UnitTests", "Telegram.Recipient.UnitTests\Telegram.Recipient.UnitTests.csproj", "{60D0E727-DC09-4C8F-AA96-0478D5204DED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{62702321-C90E-4321-A99C-A33578DEAFDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62702321-C90E-4321-A99C-A33578DEAFDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62702321-C90E-4321-A99C-A33578DEAFDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60D0E727-DC09-4C8F-AA96-0478D5204DED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60D0E727-DC09-4C8F-AA96-0478D5204DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60D0E727-DC09-4C8F-AA96-0478D5204DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60D0E727-DC09-4C8F-AA96-0478D5204DED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
