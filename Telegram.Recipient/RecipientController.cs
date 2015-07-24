@@ -17,6 +17,7 @@ namespace Telegram.Recipient
     public interface IReceiveMessages
     {
         event MessageReceivedEventHandler MessageReceived;
+        void Start();
     }
 
     public interface IWriteOutput
@@ -43,6 +44,7 @@ namespace Telegram.Recipient
         public void Run()
         {
             _messageReceiver.MessageReceived += (sender, e) => WriteMessageToOutput(e.Message);
+            _messageReceiver.Start();
         }
     }
 }

@@ -29,6 +29,11 @@ namespace Telegram.Recipient.IsolatedTests.TestRecipientController
 
         public event MessageReceivedEventHandler MessageReceived;
 
+        public void Start()
+        {
+            
+        }
+
         protected virtual void OnMessageReceived(MessageEventArgs e)
         {
             var handler = MessageReceived;
