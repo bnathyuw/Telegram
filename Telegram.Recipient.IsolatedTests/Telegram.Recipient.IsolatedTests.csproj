@@ -45,7 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Test_recipient_controller.cs" />
+    <Compile Include="TestOutputWriter\When_it_receives_a_message.cs" />
+    <Compile Include="TestRecipientController\When_it_receives_a_message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
