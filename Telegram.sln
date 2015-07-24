@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telegram.Recipient.Isolated
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telegram.Recipient.ConnectedTests", "Telegram.Recipient.ConnectedTests\Telegram.Recipient.ConnectedTests.csproj", "{0FF9D432-9779-467F-9FBA-D4555C6CC473}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telegram.Sender.IsolatedTests", "Telegram.Sender.IsolatedTests\Telegram.Sender.IsolatedTests.csproj", "{CABD5314-73FC-45A9-99DD-2A9DAAB52337}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{0FF9D432-9779-467F-9FBA-D4555C6CC473}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FF9D432-9779-467F-9FBA-D4555C6CC473}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FF9D432-9779-467F-9FBA-D4555C6CC473}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CABD5314-73FC-45A9-99DD-2A9DAAB52337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CABD5314-73FC-45A9-99DD-2A9DAAB52337}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CABD5314-73FC-45A9-99DD-2A9DAAB52337}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CABD5314-73FC-45A9-99DD-2A9DAAB52337}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
