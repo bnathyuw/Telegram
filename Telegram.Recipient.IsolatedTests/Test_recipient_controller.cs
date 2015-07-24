@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Telegram.Recipient.UnitTests
+namespace Telegram.Recipient.IsolatedTests
 {
     public class Test_recipient_controller
     {
