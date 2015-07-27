@@ -1,10 +1,10 @@
 ﻿namespace Telegram.Sender
 {
-    public struct Telegram
+    public struct Chit
     {
         private readonly string _value;
 
-        public Telegram(string value)
+        public Chit(string value)
         {
             _value = value;
         }

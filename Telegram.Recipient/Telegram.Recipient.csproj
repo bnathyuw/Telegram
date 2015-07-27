@@ -49,9 +49,9 @@
   <ItemGroup>
     <Compile Include="Telegram.cs" />
     <Compile Include="Telegraph.cs" />
-    <Compile Include="ConsoleTelegramWriter.cs" />
-    <Compile Include="TelegraphOffice.cs" />
-    <Compile Include="RecipientProgram.cs" />
+    <Compile Include="Postie.cs" />
+    <Compile Include="Clerk.cs" />
+    <Compile Include="PostOffice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

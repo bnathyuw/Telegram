@@ -2,7 +2,7 @@
 
 namespace Telegram.Recipient
 {
-    public class ConsoleTelegramWriter : IDeliverTelegrams
+    public class Postie : IDeliverTelegrams
     {
         public void Deliver(Telegram telegram)
         {

@@ -13,7 +13,7 @@ namespace Telegram.Recipient.IsolatedTests.TestTelegraphOffice
         {
             _actualTelegram = null;
 
-            var recipientController = new TelegraphOffice(this, this);
+            var recipientController = new Clerk(this, this);
 
             recipientController.Run();
 

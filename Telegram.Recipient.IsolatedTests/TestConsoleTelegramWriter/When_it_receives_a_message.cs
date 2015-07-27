@@ -18,7 +18,7 @@ namespace Telegram.Recipient.IsolatedTests.TestConsoleTelegramWriter
             _standardOut = Console.Out;
             Console.SetOut(this);
 
-            var consoleTelegramWriter = new ConsoleTelegramWriter();
+            var consoleTelegramWriter = new Postie();
             consoleTelegramWriter.Deliver(new Telegram(ExpectedValue));
         }
 

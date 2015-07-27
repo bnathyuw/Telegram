@@ -7,7 +7,7 @@ namespace Telegram.Recipient
     {
         public event TelegramReceivedEventHandler TelegramReceived;
 
-        protected virtual void OnMessageReceived(TelegramEventArgs e)
+        protected virtual void OnTelegramReceived(TelegramEventArgs e)
         {
             var handler = TelegramReceived;
             if (handler != null) handler(this, e);
@@ -15,7 +15,7 @@ namespace Telegram.Recipient
 
         public void Start()
         {
-            var connectionFactory = new ConnectionFactory() { HostName = "localhost", VirtualHost = "test" };
+            var connectionFactory = new ConnectionFactory { HostName = "localhost", VirtualHost = "test" };
             using (var connection = connectionFactory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
@@ -24,7 +24,7 @@ namespace Telegram.Recipient
 
                 var args = consumer.Queue.Dequeue();
                 var data = Encoding.UTF8.GetString(args.Body);
-                OnMessageReceived(new TelegramEventArgs(new Telegram(data)));
+                OnTelegramReceived(new TelegramEventArgs(new Telegram(data)));
                 channel.BasicAck(args.DeliveryTag, false);
             }
         }

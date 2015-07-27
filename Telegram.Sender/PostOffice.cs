@@ -2,7 +2,7 @@
 
 namespace Telegram.Sender
 {
-    public static class SenderProgram
+    public static class PostOffice
     {
         public static void Main(string[] args)
         {

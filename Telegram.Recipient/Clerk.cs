@@ -25,12 +25,12 @@ namespace Telegram.Recipient
         void Deliver(Telegram telegram);
     }
 
-    public class TelegraphOffice
+    public class Clerk
     {
         private readonly IReceiveTelegrams _telegramReceiver;
         private readonly IDeliverTelegrams _telegramDeliverer;
 
-        public TelegraphOffice(IReceiveTelegrams telegramReceiver, IDeliverTelegrams telegramDeliverer)
+        public Clerk(IReceiveTelegrams telegramReceiver, IDeliverTelegrams telegramDeliverer)
         {
             _telegramReceiver = telegramReceiver;
             _telegramDeliverer = telegramDeliverer;

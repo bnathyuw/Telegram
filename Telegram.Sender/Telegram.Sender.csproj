@@ -41,11 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Telegram.cs" />
-    <Compile Include="TelegraphOffice.cs" />
-    <Compile Include="SenderProgram.cs" />
+    <Compile Include="Chit.cs" />
+    <Compile Include="Clerk.cs" />
+    <Compile Include="PostOffice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TelegramRequestReceiver.cs" />
+    <Compile Include="Customer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
