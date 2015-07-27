@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using NUnit.Framework;
 
-namespace Telegram.Recipient.IsolatedTests.TestOutputWriter
+namespace Telegram.Recipient.IsolatedTests.TestConsoleTelegramWriter
 {
     [TestFixture]
     public class When_it_receives_a_message : TextWriter
@@ -18,8 +18,8 @@ namespace Telegram.Recipient.IsolatedTests.TestOutputWriter
             _standardOut = Console.Out;
             Console.SetOut(this);
 
-            var outputWriter = new OutputWriter();
-            outputWriter.WriteMessage(new Message(ExpectedValue));
+            var consoleTelegramWriter = new ConsoleTelegramWriter();
+            consoleTelegramWriter.Deliver(new Telegram(ExpectedValue));
         }
 
         [TearDown]

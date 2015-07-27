@@ -1,13 +1,13 @@
 using NUnit.Framework;
 
-namespace Telegram.Recipient.ConnectedTests.TestMessageReceiver
+namespace Telegram.Recipient.ConnectedTests.TestTelegram
 {
     [TestFixture]
     public class When_a_message_is_sent
     {
         private const string ExpectedValue = "Testing, testing, 1, 2, 3!";
-        private Message _actualMessage;
-        private MessageReceiver _messageReceiver;
+        private Telegram _actualTelegram;
+        private Telegraph _telegraph;
         private RabbitManager _rabbitManager;
 
         [TestFixtureSetUp]
@@ -15,14 +15,14 @@ namespace Telegram.Recipient.ConnectedTests.TestMessageReceiver
         {
             _rabbitManager = new RabbitManager();
             _rabbitManager.PurgeQueue().Wait();
-            _rabbitManager.SendMessage(ExpectedValue).Wait();
+            _rabbitManager.PublishMessage(ExpectedValue).Wait();
 
-            _messageReceiver = new MessageReceiver();
-            _messageReceiver.MessageReceived += (sender, e) =>
+            _telegraph = new Telegraph();
+            _telegraph.TelegramReceived += (sender, e) =>
             {
-                _actualMessage = e.Message;
+                _actualTelegram = e.Telegram;
             };
-            _messageReceiver.Start();
+            _telegraph.Start();
         }
 
         [TestFixtureTearDown]
@@ -34,7 +34,7 @@ namespace Telegram.Recipient.ConnectedTests.TestMessageReceiver
         [Test]
         public void Then_it_raises_a_message_received_event()
         {
-            Assert.That(_actualMessage, Is.EqualTo(new Message(ExpectedValue)));
+            Assert.That(_actualTelegram, Is.EqualTo(new Telegram(ExpectedValue)));
         }
     }
 }

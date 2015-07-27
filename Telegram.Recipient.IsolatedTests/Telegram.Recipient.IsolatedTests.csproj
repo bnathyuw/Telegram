@@ -45,10 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestOutputWriter\When_it_receives_a_message.cs" />
-    <Compile Include="TestRecipientController\When_it_receives_a_message.cs" />
+    <Compile Include="TestConsoleTelegramWriter\When_it_receives_a_message.cs" />
+    <Compile Include="TestTelegraphOffice\When_it_receives_a_telegram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestRecipientController\When_it_runs.cs" />
+    <Compile Include="TestTelegraphOffice\When_it_runs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -59,6 +59,7 @@
       <Name>Telegram.Recipient</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

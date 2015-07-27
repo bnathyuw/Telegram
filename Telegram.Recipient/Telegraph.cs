@@ -3,13 +3,13 @@ using RabbitMQ.Client;
 
 namespace Telegram.Recipient
 {
-    public class MessageReceiver : IReceiveMessages
+    public class Telegraph : IReceiveTelegrams
     {
-        public event MessageReceivedEventHandler MessageReceived;
+        public event TelegramReceivedEventHandler TelegramReceived;
 
-        protected virtual void OnMessageReceived(MessageEventArgs e)
+        protected virtual void OnMessageReceived(TelegramEventArgs e)
         {
-            var handler = MessageReceived;
+            var handler = TelegramReceived;
             if (handler != null) handler(this, e);
         }
 
@@ -24,7 +24,7 @@ namespace Telegram.Recipient
 
                 var args = consumer.Queue.Dequeue();
                 var data = Encoding.UTF8.GetString(args.Body);
-                OnMessageReceived(new MessageEventArgs(new Message(data)));
+                OnMessageReceived(new TelegramEventArgs(new Telegram(data)));
                 channel.BasicAck(args.DeliveryTag, false);
             }
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using NUnit.Framework;
 
-namespace Telegram.Recipient.ConnectedTests.TestMessageReceiver
+namespace Telegram.Recipient.ConnectedTests.TestTelegram
 {
     public class RabbitManager:IDisposable
     {
@@ -24,7 +24,7 @@ namespace Telegram.Recipient.ConnectedTests.TestMessageReceiver
             await _httpClient.DeleteAsync("http://localhost:15672/api/test/telegram/contents");
         }
 
-        public async Task SendMessage(string message)
+        public async Task PublishMessage(string message)
         {
             var wrappedMessage = new
                 {

@@ -1,9 +1,9 @@
 using NUnit.Framework;
 
-namespace Telegram.Recipient.IsolatedTests.TestRecipientController
+namespace Telegram.Recipient.IsolatedTests.TestTelegraphOffice
 {
     [TestFixture]
-    public class When_it_runs : IReceiveMessages, IWriteOutput
+    public class When_it_runs : IReceiveTelegrams, IDeliverTelegrams
     {
         private bool _started;
 
@@ -12,7 +12,7 @@ namespace Telegram.Recipient.IsolatedTests.TestRecipientController
         {
             _started = false;
 
-            var recipientController = new RecipientController(this, this);
+            var recipientController = new TelegraphOffice(this, this);
 
             recipientController.Run();
         }
@@ -23,14 +23,14 @@ namespace Telegram.Recipient.IsolatedTests.TestRecipientController
             Assert.That(_started, Is.True);
         }
 
-        public event MessageReceivedEventHandler MessageReceived;
+        public event TelegramReceivedEventHandler TelegramReceived;
         
         public void Start()
         {
             _started = true;
         }
 
-        public void WriteMessage(Message message)
+        public void Deliver(Telegram telegram)
         {
             throw new System.NotImplementedException();
         }

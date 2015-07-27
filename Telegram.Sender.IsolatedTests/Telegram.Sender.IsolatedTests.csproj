@@ -46,8 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestSenderController\When_it_receives_input.cs" />
-    <Compile Include="TestUserInputReceiver\When_it_receives_user_input.cs" />
+    <Compile Include="TestTelegraphOffice\When_it_receives_input.cs" />
+    <Compile Include="TestUserInputReceiver\When_it_receives_a_telegram_request.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
