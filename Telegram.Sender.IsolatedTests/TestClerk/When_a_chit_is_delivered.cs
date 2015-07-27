@@ -32,5 +32,10 @@ namespace Telegram.Sender.IsolatedTests.TestClerk
         {
             _actualChit = chit;
         }
+
+        public void Dispose()
+        {
+            
+        }
     }
 }

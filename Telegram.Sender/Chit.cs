@@ -8,5 +8,10 @@
         {
             _value = value;
         }
+
+        public string Value
+        {
+            get { return _value; }
+        }
     }
 }

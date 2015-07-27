@@ -1,4 +1,6 @@
-﻿namespace Telegram.Sender
+﻿using System;
+
+namespace Telegram.Sender
 {
     public class ChitDeliveredEventArgs
     {
@@ -17,12 +19,12 @@
         event ChitDeliveredEventHandler ChitDelivered;
     }
 
-    public interface ISendTelegrams
+    public interface ISendTelegrams : IDisposable
     {
         void Send(Chit chit);
     }
 
-    public class Clerk
+    public class Clerk : IDisposable
     {
         private readonly IDeliverChits _chitReceiver;
         private readonly ISendTelegrams _telegramSender;
@@ -36,6 +38,11 @@
         public void Run()
         {
             _chitReceiver.ChitDelivered += (sender, args) => _telegramSender.Send(args.Chit);
+        }
+
+        public void Dispose()
+        {
+            _telegramSender.Dispose();
         }
     }
 }

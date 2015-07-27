@@ -26,7 +26,7 @@ namespace Telegram.Recipient
             _thread.Start();
             while (!_thread.IsAlive)
             {
-            }
+            }   
         }
 
         public void Dispose()
