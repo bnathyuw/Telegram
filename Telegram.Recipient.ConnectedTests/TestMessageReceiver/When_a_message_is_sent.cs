@@ -1,6 +1,4 @@
-using System.Text;
 using NUnit.Framework;
-using RabbitMQ.Client;
 
 namespace Telegram.Recipient.ConnectedTests.TestMessageReceiver
 {
@@ -9,33 +7,34 @@ namespace Telegram.Recipient.ConnectedTests.TestMessageReceiver
     {
         private const string ExpectedValue = "Testing, testing, 1, 2, 3!";
         private Message _actualMessage;
+        private MessageReceiver _messageReceiver;
+        private RabbitManager _rabbitManager;
+
+        [TestFixtureSetUp]
+        public void TestFixtureSetUp()
+        {
+            _rabbitManager = new RabbitManager();
+            _rabbitManager.PurgeQueue().Wait();
+            _rabbitManager.SendMessage(ExpectedValue).Wait();
+
+            _messageReceiver = new MessageReceiver();
+            _messageReceiver.MessageReceived += (sender, e) =>
+            {
+                _actualMessage = e.Message;
+            };
+            _messageReceiver.Start();
+        }
+
+        [TestFixtureTearDown]
+        public void TestFixtureTearDown()
+        {
+            _rabbitManager.Dispose();
+        }
 
         [Test]
         public void Then_it_raises_a_message_received_event()
         {
-            var messageReceiver = new MessageReceiver();
-
-            messageReceiver.MessageReceived += (sender, e) =>
-                {
-                    _actualMessage = e.Message;
-                };
-
-            messageReceiver.Start();
-
-            SendMessage(ExpectedValue);
-
             Assert.That(_actualMessage, Is.EqualTo(new Message(ExpectedValue)));
-        }
-
-        private void SendMessage(string message)
-        {
-            var connectionFactory = new ConnectionFactory {HostName = "localhost", VirtualHost = "test"};
-            using (var connection = connectionFactory.CreateConnection())
-            using (var channel = connection.CreateModel())
-            {
-                var body = Encoding.UTF8.GetBytes(message);
-                channel.BasicPublish("telegram", "", null, body);
-            }
         }
     }
 }

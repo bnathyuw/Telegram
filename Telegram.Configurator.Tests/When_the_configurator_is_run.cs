@@ -73,13 +73,33 @@ namespace Telegram.Configurator.Tests
         }
 
         [Test]
-        public async void Then_there_is_a_queue_named_test()
+        public async void Then_there_is_an_exchange_named_telegram()
+        {
+            var exchanges = await GetAs<List<Exchange>>("exchanges/test");
+
+            var expectedQueue = new Exchange { Name = "telegram" };
+
+            Assert.That(exchanges, Has.Member(expectedQueue));
+        }
+
+        [Test]
+        public async void Then_there_is_a_queue_named_telegram()
         {
             var queues = await GetAs<List<Queue>>("queues/test");
 
             var expectedQueue = new Queue {Name = "telegram"};
 
             Assert.That(queues, Has.Member(expectedQueue));
+        }
+
+        [Test]
+        public async void Then_the_telegram_exchange_and_queue_are_bound()
+        {
+            var bindings = await GetAs<List<Binding>>("bindings/test");
+
+            var expectedBinding = new Binding {Source = "telegram", Destination = "telegram"};
+
+            Assert.That(bindings, Has.Member(expectedBinding));
         }
 
 
@@ -109,7 +129,7 @@ namespace Telegram.Configurator.Tests
 
         public override string ToString()
         {
-            return string.Format("Name: {0}", Name);
+            return string.Format("VirtualHost<Name: {0}>", Name);
         }
     }
 
@@ -123,7 +143,17 @@ namespace Telegram.Configurator.Tests
 
         public override string ToString()
         {
-            return string.Format("User: {0}; VHost: {1}; Configure: {2}; Write: {3}; Read: {4}", User, VHost, Configure, Write, Read);
+            return string.Format("Permission<User: {0}; VHost: {1}; Configure: {2}; Write: {3}; Read: {4}>", User, VHost, Configure, Write, Read);
+        }
+    }
+
+    public struct Exchange
+    {
+        public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Exchange<Name: {0}>", Name);
         }
     }
 
@@ -133,7 +163,18 @@ namespace Telegram.Configurator.Tests
 
         public override string ToString()
         {
-            return string.Format("Name: {0}", Name);
+            return string.Format("Queue<Name: {0}>", Name);
+        }
+    }
+
+    public struct Binding
+    {
+        public string Source { get; set; }
+        public string Destination { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Binding<Source: {0}; Destination: {1}>", Source, Destination);
         }
     }
 }

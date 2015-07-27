@@ -29,7 +29,9 @@ namespace Telegram.Configurator
 
             await CreateVirtualHost();
             await GiveUserPermissions(UserName);
+            await CreateExchange("telegram");
             await CreateQueue("telegram");
+            await CreateBinding("telegram", "telegram");
         }
 
         private static async Task CreateVirtualHost()
@@ -42,8 +44,17 @@ namespace Telegram.Configurator
         private static async Task GiveUserPermissions(string userName)
         {
             var requestUri = string.Format("{0}permissions/{1}/{2}", ApiRoot, VirtualHostName, userName);
-            object permission = new {configure = ".*", write = ".*", read = ".*"};
+            var permission = new {configure = ".*", write = ".*", read = ".*"};
             var body = new JavaScriptSerializer().Serialize(permission);
+            var content = new StringContent(body, Encoding.UTF8, JsonContentType);
+            await _httpClient.PutAsync(requestUri, content);
+        }
+
+        private static async Task CreateExchange(string queueName)
+        {
+            var requestUri = string.Format("{0}/exchanges/{1}/{2}", ApiRoot, VirtualHostName, queueName);
+            var exchange = new {type = "direct"};
+            var body = new JavaScriptSerializer().Serialize(exchange);
             var content = new StringContent(body, Encoding.UTF8, JsonContentType);
             await _httpClient.PutAsync(requestUri, content);
         }
@@ -53,6 +64,13 @@ namespace Telegram.Configurator
             var requestUri = string.Format("{0}/queues/{1}/{2}", ApiRoot, VirtualHostName, queueName);
             var content = new StringContent("{}", Encoding.UTF8, JsonContentType);
             await _httpClient.PutAsync(requestUri, content);
+        }
+
+        private static async Task CreateBinding(string exchangeName, string queueName)
+        {
+            var requestUri = string.Format("{0}/bindings/{1}/e/{2}/q/{3}", ApiRoot, VirtualHostName, exchangeName, queueName);
+            var content = new StringContent("", Encoding.UTF8, JsonContentType);
+            await _httpClient.PostAsync(requestUri, content);
         }
     }
 }
