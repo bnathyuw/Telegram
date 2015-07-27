@@ -34,5 +34,10 @@ namespace Telegram.Recipient.IsolatedTests.TestClerk
         {
             throw new System.NotImplementedException();
         }
+
+        public void Dispose()
+        {
+            
+        }
     }
 }

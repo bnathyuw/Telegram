@@ -2,9 +2,9 @@
 
 namespace Telegram.Recipient
 {
-    public class TelegramEventArgs : EventArgs
+    public class TelegramReceivedEventArgs : EventArgs
     {
-        public TelegramEventArgs(Telegram telegram)
+        public TelegramReceivedEventArgs(Telegram telegram)
         {
             Telegram = telegram;
         }
@@ -12,9 +12,9 @@ namespace Telegram.Recipient
         public Telegram Telegram { get; private set; }
     }
 
-    public delegate void TelegramReceivedEventHandler(object sender, TelegramEventArgs e);
+    public delegate void TelegramReceivedEventHandler(object sender, TelegramReceivedEventArgs e);
 
-    public interface IReceiveTelegrams
+    public interface IReceiveTelegrams : IDisposable
     {
         event TelegramReceivedEventHandler TelegramReceived;
         void Start();

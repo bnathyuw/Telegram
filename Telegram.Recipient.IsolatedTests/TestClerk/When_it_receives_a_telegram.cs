@@ -18,7 +18,7 @@ namespace Telegram.Recipient.IsolatedTests.TestClerk
             recipientController.Run();
 
             _expectedTelegram = new Telegram("Hello, world!");
-            OnTelegramReceived(new TelegramEventArgs(_expectedTelegram));
+            OnTelegramReceived(new TelegramReceivedEventArgs(_expectedTelegram));
         }
 
         [Test]
@@ -34,7 +34,7 @@ namespace Telegram.Recipient.IsolatedTests.TestClerk
             
         }
 
-        protected virtual void OnTelegramReceived(TelegramEventArgs e)
+        protected virtual void OnTelegramReceived(TelegramReceivedEventArgs e)
         {
             var handler = TelegramReceived;
             if (handler == null) Assert.Fail("No listener attached");
@@ -45,6 +45,11 @@ namespace Telegram.Recipient.IsolatedTests.TestClerk
         public void Deliver(Telegram telegram)
         {
             _actualTelegram = telegram;
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }
