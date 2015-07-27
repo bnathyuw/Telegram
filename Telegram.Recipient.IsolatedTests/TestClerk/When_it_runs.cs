@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Telegram.Recipient.IsolatedTests.TestTelegraphOffice
+namespace Telegram.Recipient.IsolatedTests.TestClerk
 {
     [TestFixture]
     public class When_it_runs : IReceiveTelegrams, IDeliverTelegrams

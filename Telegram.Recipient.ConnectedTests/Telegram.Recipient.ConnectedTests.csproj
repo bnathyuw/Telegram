@@ -48,8 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestTelegram\RabbitManager.cs" />
-    <Compile Include="TestTelegram\When_a_message_is_sent.cs" />
+    <Compile Include="TestTelegraph\RabbitManager.cs" />
+    <Compile Include="TestTelegraph\When_a_message_is_sent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

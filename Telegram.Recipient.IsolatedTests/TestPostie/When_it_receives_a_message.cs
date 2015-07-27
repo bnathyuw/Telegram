@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using NUnit.Framework;
 
-namespace Telegram.Recipient.IsolatedTests.TestConsoleTelegramWriter
+namespace Telegram.Recipient.IsolatedTests.TestPostie
 {
     [TestFixture]
     public class When_it_receives_a_message : TextWriter

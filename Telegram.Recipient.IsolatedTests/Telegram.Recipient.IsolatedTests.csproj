@@ -45,10 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestConsoleTelegramWriter\When_it_receives_a_message.cs" />
-    <Compile Include="TestTelegraphOffice\When_it_receives_a_telegram.cs" />
+    <Compile Include="TestPostie\When_it_receives_a_message.cs" />
+    <Compile Include="TestClerk\When_it_receives_a_telegram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestTelegraphOffice\When_it_runs.cs" />
+    <Compile Include="TestClerk\When_it_runs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

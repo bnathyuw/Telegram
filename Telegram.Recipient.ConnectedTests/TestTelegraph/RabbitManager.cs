@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using NUnit.Framework;
 
-namespace Telegram.Recipient.ConnectedTests.TestTelegram
+namespace Telegram.Recipient.ConnectedTests.TestTelegraph
 {
     public class RabbitManager:IDisposable
     {
