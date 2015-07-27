@@ -50,7 +50,9 @@ namespace Telegram.Configurator.Tests
         {
             var virtualHosts = await GetAs<List<VirtualHost>>("vhosts");
 
-            Assert.That(virtualHosts, Has.Member(new VirtualHost {Name = "test"}));
+            var expectedVirtualHost = new VirtualHost {Name = "test"};
+
+            Assert.That(virtualHosts, Has.Member(expectedVirtualHost));
         }
 
         [Test]
@@ -58,15 +60,26 @@ namespace Telegram.Configurator.Tests
         {
             var permissions = await GetAs<Permission>("permissions/test/guest");
 
-            Assert.That(permissions,
-                        Is.EqualTo(new Permission
-                            {
-                                User = "guest",
-                                VHost = "test",
-                                Configure = ".*",
-                                Write = ".*",
-                                Read = ".*"
-                            }));
+            var expectedPermission = new Permission
+                {
+                    User = "guest",
+                    VHost = "test",
+                    Configure = ".*",
+                    Write = ".*",
+                    Read = ".*"
+                };
+
+            Assert.That(permissions, Is.EqualTo(expectedPermission));
+        }
+
+        [Test]
+        public async void Then_there_is_a_queue_named_test()
+        {
+            var queues = await GetAs<List<Queue>>("queues/test");
+
+            var expectedQueue = new Queue {Name = "telegram"};
+
+            Assert.That(queues, Has.Member(expectedQueue));
         }
 
 
@@ -90,6 +103,16 @@ namespace Telegram.Configurator.Tests
         }
     }
 
+    public struct VirtualHost
+    {
+        public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Name: {0}", Name);
+        }
+    }
+
     public struct Permission
     {
         public string User { get; set; }
@@ -104,7 +127,7 @@ namespace Telegram.Configurator.Tests
         }
     }
 
-    public struct VirtualHost
+    public struct Queue
     {
         public string Name { get; set; }
 

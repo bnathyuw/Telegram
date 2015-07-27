@@ -27,23 +27,31 @@ namespace Telegram.Configurator
             var handler = new HttpClientHandler {Credentials = credentials};
             _httpClient = new HttpClient(handler);
 
-            await CreateVirtualHost(VirtualHostName);
-            await GiveUserPermissionsOnVirtualHost(VirtualHostName, UserName);
+            await CreateVirtualHost();
+            await GiveUserPermissions(UserName);
+            await CreateQueue("telegram");
         }
 
-        private static async Task GiveUserPermissionsOnVirtualHost(string virtualHostName, string userName)
+        private static async Task CreateVirtualHost()
         {
-            var requestUri = string.Format("{0}permissions/{1}/{2}", ApiRoot, virtualHostName, userName);
+            var requestUri = string.Format("{0}vhosts/{1}", ApiRoot, VirtualHostName);
+            var content = new StringContent("", Encoding.UTF8, JsonContentType);
+            await _httpClient.PutAsync(requestUri, content);
+        }
+
+        private static async Task GiveUserPermissions(string userName)
+        {
+            var requestUri = string.Format("{0}permissions/{1}/{2}", ApiRoot, VirtualHostName, userName);
             object permission = new {configure = ".*", write = ".*", read = ".*"};
             var body = new JavaScriptSerializer().Serialize(permission);
             var content = new StringContent(body, Encoding.UTF8, JsonContentType);
             await _httpClient.PutAsync(requestUri, content);
         }
 
-        private static async Task CreateVirtualHost(string virtualHostName)
+        private static async Task CreateQueue(string queueName)
         {
-            var requestUri = string.Format("{0}vhosts/{1}", ApiRoot, virtualHostName);
-            var content = new StringContent("", Encoding.UTF8, JsonContentType);
+            var requestUri = string.Format("{0}/queues/{1}/{2}", ApiRoot, VirtualHostName, queueName);
+            var content = new StringContent("{}", Encoding.UTF8, JsonContentType);
             await _httpClient.PutAsync(requestUri, content);
         }
     }
