@@ -14,7 +14,7 @@ namespace Telegram.Sender
 
     public delegate void ChitDeliveredEventHandler(object sender, ChitDeliveredEventArgs e);
 
-    public interface IDeliverChits
+    public interface IDeliverChits : IDisposable
     {
         event ChitDeliveredEventHandler ChitDelivered;
     }

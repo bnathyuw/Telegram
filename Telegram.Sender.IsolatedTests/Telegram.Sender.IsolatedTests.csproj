@@ -48,6 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestClerk\When_a_chit_is_delivered.cs" />
     <Compile Include="TestCustomer\When_it_has_a_new_message_to_send.cs" />
+    <Compile Include="TestCustomer\When_it_has_two_messages_to_send.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
