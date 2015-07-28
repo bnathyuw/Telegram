@@ -16,14 +16,14 @@ namespace Telegram.Sender
 
         public void Start()
         {
-            _thread = new Thread(Foo);
+            _thread = new Thread(ListenForInput);
             _thread.Start();
             while (!_thread.IsAlive)
             {
             }
         }
 
-        private void Foo()
+        private void ListenForInput()
         {
             while (true)
             {
