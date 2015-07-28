@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 using NUnit.Framework;
 
 namespace Telegram.Configurator.Tests
@@ -12,8 +7,7 @@ namespace Telegram.Configurator.Tests
     [TestFixture]
     public class When_the_configurator_is_run
     {
-        private HttpClient _httpClient;
-        private JavaScriptSerializer _javaScriptSerializer;
+        private RabbitClient _rabbitClient;
 
         [TestFixtureSetUp]
         public void TestFixtureSetUp()
@@ -27,28 +21,23 @@ namespace Telegram.Configurator.Tests
                         }
                 })
             {
-
                 process.Start();
-
                 process.WaitForExit();
             }
 
-            var credentials = new NetworkCredential("guest", "guest");
-            var handler = new HttpClientHandler {Credentials = credentials};
-            _httpClient = new HttpClient(handler);
-            _javaScriptSerializer = new JavaScriptSerializer();
+            _rabbitClient = new RabbitClient();
         }
 
         [TestFixtureTearDown]
         public void TestFixtureTearDown()
         {
-            _httpClient.Dispose();
+            _rabbitClient.Dispose();
         }
 
         [Test]
         public async void Then_there_is_a_virtual_host_named_test()
         {
-            var virtualHosts = await GetAs<List<VirtualHost>>("vhosts");
+            var virtualHosts = await _rabbitClient.GetAs<List<VirtualHost>>("vhosts");
 
             var expectedVirtualHost = new VirtualHost {Name = "test"};
 
@@ -58,7 +47,7 @@ namespace Telegram.Configurator.Tests
         [Test]
         public async void Then_the_user_has_permissions_on_the_virtual_host()
         {
-            var permissions = await GetAs<Permission>("permissions/test/guest");
+            var permission = await _rabbitClient.GetAs<Permission>("permissions/test/guest");
 
             var expectedPermission = new Permission
                 {
@@ -69,13 +58,13 @@ namespace Telegram.Configurator.Tests
                     Read = ".*"
                 };
 
-            Assert.That(permissions, Is.EqualTo(expectedPermission));
+            Assert.That(permission, Is.EqualTo(expectedPermission));
         }
 
         [Test]
         public async void Then_there_is_an_exchange_named_telegram()
         {
-            var exchanges = await GetAs<List<Exchange>>("exchanges/test");
+            var exchanges = await _rabbitClient.GetAs<List<Exchange>>("exchanges/test");
 
             var expectedQueue = new Exchange { Name = "telegram" };
 
@@ -85,7 +74,7 @@ namespace Telegram.Configurator.Tests
         [Test]
         public async void Then_there_is_a_queue_named_telegram()
         {
-            var queues = await GetAs<List<Queue>>("queues/test");
+            var queues = await _rabbitClient.GetAs<List<Queue>>("queues/test");
 
             var expectedQueue = new Queue {Name = "telegram"};
 
@@ -95,86 +84,11 @@ namespace Telegram.Configurator.Tests
         [Test]
         public async void Then_the_telegram_exchange_and_queue_are_bound()
         {
-            var bindings = await GetAs<List<Binding>>("bindings/test");
+            var bindings = await _rabbitClient.GetAs<List<Binding>>("bindings/test");
 
             var expectedBinding = new Binding {Source = "telegram", Destination = "telegram"};
 
             Assert.That(bindings, Has.Member(expectedBinding));
-        }
-
-
-        private async Task<T> GetAs<T>(string endpoint)
-        {
-            var requestUri = "http://localhost:15672/api/" + endpoint;
-            
-            Console.WriteLine("GET {0}", requestUri);
-            
-            var responseMessage = await _httpClient.GetAsync(requestUri);
-
-            Assert.That(responseMessage.StatusCode, Is.EqualTo(HttpStatusCode.OK), "Status code");
-
-            var httpContent = responseMessage.Content;
-
-            var body = await httpContent.ReadAsStringAsync();
-
-            Console.WriteLine(body);
-
-            return _javaScriptSerializer.Deserialize<T>(body);
-        }
-    }
-
-    public struct VirtualHost
-    {
-        public string Name { get; set; }
-
-        public override string ToString()
-        {
-            return string.Format("VirtualHost<Name: {0}>", Name);
-        }
-    }
-
-    public struct Permission
-    {
-        public string User { get; set; }
-        public string VHost { get; set; }
-        public string Configure { get; set; }
-        public string Write { get; set; }
-        public string Read { get; set; }
-
-        public override string ToString()
-        {
-            return string.Format("Permission<User: {0}; VHost: {1}; Configure: {2}; Write: {3}; Read: {4}>", User, VHost, Configure, Write, Read);
-        }
-    }
-
-    public struct Exchange
-    {
-        public string Name { get; set; }
-
-        public override string ToString()
-        {
-            return string.Format("Exchange<Name: {0}>", Name);
-        }
-    }
-
-    public struct Queue
-    {
-        public string Name { get; set; }
-
-        public override string ToString()
-        {
-            return string.Format("Queue<Name: {0}>", Name);
-        }
-    }
-
-    public struct Binding
-    {
-        public string Source { get; set; }
-        public string Destination { get; set; }
-
-        public override string ToString()
-        {
-            return string.Format("Binding<Source: {0}; Destination: {1}>", Source, Destination);
         }
     }
 }

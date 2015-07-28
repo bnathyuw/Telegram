@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Binding.cs" />
+    <Compile Include="Exchange.cs" />
+    <Compile Include="Permission.cs" />
+    <Compile Include="Queue.cs" />
+    <Compile Include="RabbitClient.cs" />
+    <Compile Include="VirtualHost.cs" />
     <Compile Include="When_the_configurator_is_run.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
